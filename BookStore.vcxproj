@@ -73,7 +73,9 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ManagedAssembly>true</ManagedAssembly>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -119,6 +121,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <Reference Include="itextsharp">
+      <HintPath>packages\iTextSharp.5.5.13.3\lib\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Npgsql">
+      <HintPath>packages\Npgsql.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -130,6 +138,7 @@
     <ClCompile Include="Cart.cpp" />
     <ClCompile Include="CartItem.cpp" />
     <ClCompile Include="Catalogue.cpp" />
+    <ClCompile Include="ListViewItemSorter.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MyForm.cpp" />
     <ClCompile Include="PaperBook.cpp" />
@@ -139,6 +148,7 @@
     <ClInclude Include="Cart.h" />
     <ClInclude Include="CartItem.h" />
     <ClInclude Include="Catalogue.h" />
+    <ClInclude Include="ListViewItemSorter.h" />
     <ClInclude Include="MyForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>

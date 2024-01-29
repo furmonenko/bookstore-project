@@ -3,88 +3,75 @@
 
 namespace BookStore
 {
-    using namespace System;
-    using namespace System::Collections::Generic;
+	using namespace System;
+	using namespace System::Collections::Generic;
 
 	ref class Cart
 	{
-    public:
-        List<CartItem^>^ Items;
+	public:
+		System::Collections::Generic::List<CartItem^>^ Items;
 
-    private:
-        Dictionary<int, CartItem^>^ ItemDic;
+	private:
+		Dictionary<int, CartItem^>^ ItemDic;
 
-    public:
-        Cart()
-        {
-            Items = gcnew List<CartItem^>();
-            ItemDic = gcnew Dictionary<int, CartItem^>();
-        }
+	public:
+		Cart()
+		{
+			Items = gcnew System::Collections::Generic::List<CartItem^>();
+			ItemDic = gcnew Dictionary<int, CartItem^>();
+		}
 
-        void AddNewItem(CartItem^ NewItem)
-        {
-            Items->Add(NewItem);
-            NewItem->IncrementQuantity();
-        }
+		void AddNewItem(CartItem^ NewItem)
+		{
+			Items->Add(NewItem);
+			NewItem->IncrementQuantity();
+		}
 
-        bool DeleteBook(CartItem^ bookToDelete)
-        {
-            bookToDelete->DecrementQuantity();
-            return Items->Remove(bookToDelete);
-        }
+		bool DeleteBook(CartItem^ bookToDelete)
+		{
+			bookToDelete->DecrementQuantity();
+			return Items->Remove(bookToDelete);
+		}
 
-        CartItem^ GetBook(int index)
-        {
-            return Items[index];
-        }
+		CartItem^ GetBook(int index)
+		{
+			return Items[index];
+		}
 
-        CartItem^ FindByID(int ID)
-        {
-            for each (CartItem^ Item in Items)
-            {
-                if (Item->GetID() == ID)
-                {
-                    return Item;
-                }
-            }
-            return nullptr;
-        }
+		CartItem^ FindByID(int ID)
+		{
+			for each (CartItem ^ Item in Items)
+			{
+				if (Item->GetID() == ID)
+				{
+					return Item;
+				}
+			}
+			return nullptr;
+		}
 
 
-        int GetSize()
-        {
-            return Items->Count;
-        }
+		int GetSize()
+		{
+			return Items->Count;
+		}
 
-        void Sort()
-        {
-            // Implement sorting logic here
-            // For example, you might want to sort by book title or author
-        }
+		void Sort()
+		{
 
-        //bool RemoveAt(const int ID)
-        //{
-        //    CartItem^ ItemToDelete = FindByID(ID);
+		}
 
-        //    if (ItemToDelete != nullptr)
-        //    {
-        //        Items->RemoveAt(ID - 1);
-        //        return true;
-        //    }
-        //    return false;
-        //}
+		bool RemoveByID(const int ID)
+		{
+			CartItem^ ItemToDelete = FindByID(ID);
 
-        bool RemoveByID(const int ID)
-        {
-            CartItem^ ItemToDelete = FindByID(ID);
-
-            if (ItemToDelete != nullptr)
-            {
-                Items->Remove(ItemToDelete);
-                return true;
-            }
-            return false;
-        }
-    };
+			if (ItemToDelete != nullptr)
+			{
+				Items->Remove(ItemToDelete);
+				return true;
+			}
+			return false;
+		}
+	};
 }
 

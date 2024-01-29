@@ -4,13 +4,7 @@ namespace BookStore
 {
 	public enum class BookGenre
 	{
-		Fiction,
-		NonFiction,
-		ScienceFiction,
-		Mystery,
-		Fantasy,
-		Biography,
-		History,
+		Elemental_Magic,
 	};
 
 	public interface class Book

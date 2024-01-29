@@ -3,6 +3,7 @@
 #include "PaperBook.h"
 #include "CartItem.h"
 #include "Cart.h"
+#include "ListViewItemSorter.h"
 
 namespace BookStore {
 
@@ -13,8 +14,8 @@ namespace BookStore {
 	using namespace System::Data;
 	using namespace System::Drawing;
 
-	// using namespace iTextSharp::text;
-	// using namespace iTextSharp::text::pdf;
+	using namespace iTextSharp::text;
+	using namespace iTextSharp::text::pdf;
 
 	public ref class MyForm : public System::Windows::Forms::Form
 	{
@@ -77,7 +78,7 @@ namespace BookStore {
 
 #pragma region Windows Form Designer generated code
 		void InitializeComponent(void)
-		   {
+		{
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(MyForm::typeid));
 			this->ChosenBookLabel = (gcnew System::Windows::Forms::Label());
 			this->AddToCart = (gcnew System::Windows::Forms::Button());
@@ -199,6 +200,7 @@ namespace BookStore {
 			this->storeList->TabIndex = 0;
 			this->storeList->UseCompatibleStateImageBehavior = false;
 			this->storeList->View = System::Windows::Forms::View::Details;
+			this->storeList->ColumnClick += gcnew System::Windows::Forms::ColumnClickEventHandler(this, &MyForm::CartList_ColumnClick);
 			this->storeList->Click += gcnew System::EventHandler(this, &MyForm::storeList_Click);
 			this->storeList->DoubleClick += gcnew System::EventHandler(this, &MyForm::StoreList_DoubleClick);
 			// 
@@ -247,6 +249,7 @@ namespace BookStore {
 			this->CartList->TabIndex = 1;
 			this->CartList->UseCompatibleStateImageBehavior = false;
 			this->CartList->View = System::Windows::Forms::View::Details;
+			this->CartList->ColumnClick += gcnew System::Windows::Forms::ColumnClickEventHandler(this, &MyForm::CartList_ColumnClick);
 			// 
 			// columnHeader1
 			// 
@@ -325,6 +328,7 @@ namespace BookStore {
 			this->PurchaseButton->TabIndex = 2;
 			this->PurchaseButton->Text = L"Purchase";
 			this->PurchaseButton->UseVisualStyleBackColor = true;
+			this->PurchaseButton->Click += gcnew System::EventHandler(this, &MyForm::PurchaseButton_Click);
 			// 
 			// DebugLabel
 			// 
@@ -364,30 +368,6 @@ namespace BookStore {
 #pragma endregion
 
 	private:
-		void ProcessCartItem(ListViewItem^ item)
-		{
-			BookStore::Book^ selectedBook = dynamic_cast<BookStore::Book^>(item->Tag);
-			ListViewItem^ existingItem = FindCartItemByID(selectedBook->GetID());
-
-			if (existingItem)
-			{
-				UpdateExistingCartItem(existingItem);
-			}
-			else
-			{
-				AddNewCartItem(selectedBook);
-			}
-		}
-
-		void UpdateExistingCartItem(ListViewItem^ existingItem)
-		{
-			CartItem^ cartItem = dynamic_cast<CartItem^>(existingItem->Tag);
-			cartItem->IncrementQuantity();
-
-			UpdateNumericUpDownValue(cartItem->GetID(), cartItem->GetQuantity());
-			TotalPrice += cartItem->GetPrice();
-		}
-
 		void AddNewCartItem(BookStore::Book^ selectedBook)
 		{
 			CartItem^ newCartItem = gcnew CartItem(selectedBook);
@@ -429,6 +409,30 @@ namespace BookStore {
 			int xPos = GetColumnPosition(CartList, columnIndex) + 15;
 			int yPos = Item->Bounds.Y + 45;
 			NumberFields[ItemID]->SetBounds(xPos, yPos, 45, 30);
+		}
+
+		void ProcessCartItem(ListViewItem^ item)
+		{
+			BookStore::Book^ selectedBook = dynamic_cast<BookStore::Book^>(item->Tag);
+			ListViewItem^ existingItem = FindCartItemByID(selectedBook->GetID());
+
+			if (existingItem)
+			{
+				UpdateExistingCartItem(existingItem);
+			}
+			else
+			{
+				AddNewCartItem(selectedBook);
+			}
+		}
+
+		void UpdateExistingCartItem(ListViewItem^ existingItem)
+		{
+			CartItem^ cartItem = dynamic_cast<CartItem^>(existingItem->Tag);
+			cartItem->IncrementQuantity();
+
+			UpdateNumericUpDownValue(cartItem->GetID(), cartItem->GetQuantity());
+			TotalPrice += cartItem->GetPrice();
 		}
 
 		void UpdateCartItemQuantity(int itemId, int newQuantity)
@@ -501,7 +505,7 @@ namespace BookStore {
 
 		void RedrawNumericUpDowns()
 		{
-			for each (ListViewItem^ Item in CartList->Items)
+			for each (ListViewItem ^ Item in CartList->Items)
 			{
 				CartItem^ cartItem = safe_cast<CartItem^>(Item->Tag);
 				int itemId = cartItem->GetID(); // Assuming the Tag stores the item ID
@@ -549,7 +553,7 @@ namespace BookStore {
 			item->Tag = cartItem;
 
 			String^ linkToImage = selectedBook->GetImageLink();
-			CartImageList->Images->Add(Image::FromFile(linkToImage));
+			CartImageList->Images->Add(System::Drawing::Image::FromFile(linkToImage));
 			item->ImageIndex = CartImageList->Images->Count - 1;
 
 			TotalPrice += cartItem->GetPrice();
@@ -572,6 +576,20 @@ namespace BookStore {
 			}
 
 			return position;
+		}
+
+		void SortListView(ListView^ listView, int column)
+		{
+			static bool ascending = true;
+
+			ascending = !ascending;
+
+			listView->ListViewItemSorter = gcnew ListViewItemComparer(column, ascending);
+
+			Console::WriteLine(column);
+			listView->Sort();
+
+			RedrawNumericUpDowns();
 		}
 
 		// Events:
@@ -643,6 +661,18 @@ namespace BookStore {
 				}
 			}
 		}
+		System::Void CartList_ColumnClick(System::Object^ sender, System::Windows::Forms::ColumnClickEventArgs^ e)
+		{
+			ListView^ listView = safe_cast<ListView^>(sender);
+			SortListView(listView, e->Column);
+		}
+		System::Void PurchaseButton_Click(System::Object^ sender, System::EventArgs^ e)
+		{
+			String^ Meesage = "Your Receipt is ready! Get it there - " + "C:\\Users\\zfurm\\Downloads\\Receipt.pdf";
+			MessageBox::Show(Meesage);
+			CreatePDFReceipt("C:\\Users\\zfurm\\Downloads\\Receipt.pdf");
+		}
+
 
 		// Debugging Functions:
 		System::Void StoreList_DoubleClick(System::Object^ sender, System::EventArgs^ e)
@@ -655,6 +685,49 @@ namespace BookStore {
 			BookStore::Book^ book = dynamic_cast<BookStore::Book^>(storeList->SelectedItems[0]->Tag);
 			ChosenBookLabel->Text = book->GetID().ToString();
 		}
-};
+
+		//
+		void CreatePDFReceipt(String^ filePath)
+		{
+			try
+			{
+				Document^ document = gcnew Document(PageSize::LETTER);
+
+				PdfWriter::GetInstance(document, gcnew System::IO::FileStream(filePath, System::IO::FileMode::Create));
+
+				document->Open();
+
+				document->Add(gcnew Paragraph("Receipt"));
+				document->Add(gcnew Paragraph("-------------------------------"));
+
+				for each (CartItem ^ item in ShopCart->Items)
+				{
+					String^ itemLine = String::Format("{0} - {1} PLN x {2}", item->GetName(), item->GetPrice(), item->GetQuantity());
+					document->Add(gcnew Paragraph(itemLine));
+				}
+
+				document->Add(gcnew Paragraph("-------------------------------"));
+
+				float VAT = TotalPrice * .23;
+				String^ totalPriceLine = String::Format("Total Price: {0} PLN (Included 23% VAT - {1} PLN)", TotalPrice, VAT);
+				document->Add(gcnew Paragraph(totalPriceLine));
+
+				document->Close();
+			}
+			catch (DocumentException^ de)
+			{
+				MessageBox::Show("IOException: " + de->Message);
+			}
+			catch (System::IO::IOException^ ioe)
+			{
+				MessageBox::Show("IOException: " + ioe->Message);
+			}
+			catch (System::IO::FileNotFoundException^ ex)
+			{
+				MessageBox::Show("FileNotFoundException: " + ex->Message);
+			}
+		}
+
+	};
 };
 
