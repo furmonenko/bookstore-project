@@ -61,6 +61,30 @@ namespace BookStore
             // Implement sorting logic here
             // For example, you might want to sort by book title or author
         }
+
+        //bool RemoveAt(const int ID)
+        //{
+        //    CartItem^ ItemToDelete = FindByID(ID);
+
+        //    if (ItemToDelete != nullptr)
+        //    {
+        //        Items->RemoveAt(ID - 1);
+        //        return true;
+        //    }
+        //    return false;
+        //}
+
+        bool RemoveByID(const int ID)
+        {
+            CartItem^ ItemToDelete = FindByID(ID);
+
+            if (ItemToDelete != nullptr)
+            {
+                Items->Remove(ItemToDelete);
+                return true;
+            }
+            return false;
+        }
     };
 }
 

@@ -13,6 +13,9 @@ namespace BookStore {
 	using namespace System::Data;
 	using namespace System::Drawing;
 
+	// using namespace iTextSharp::text;
+	// using namespace iTextSharp::text::pdf;
+
 	public ref class MyForm : public System::Windows::Forms::Form
 	{
 	public:
@@ -44,39 +47,37 @@ namespace BookStore {
 
 		Dictionary<int, NumericUpDown^>^ NumberFields;
 
-
-	private: System::Windows::Forms::Label^ ChosenBookLabel;
-
-		   System::Windows::Forms::Button^ AddToCart;
-	private: System::Windows::Forms::Label^ TotalPriceLabel;
-
-		   System::Windows::Forms::Button^ goToCart;
-		   System::Windows::Forms::Panel^ MainPanel;
-		   System::Windows::Forms::TabControl^ Tab;
-		   System::Windows::Forms::TabPage^ tabPage1;
-		   System::Windows::Forms::ListView^ storeList;
-		   System::Windows::Forms::ColumnHeader^ Book;
-		   System::Windows::Forms::ColumnHeader^ Author;
-		   System::Windows::Forms::ColumnHeader^ Category;
-		   System::Windows::Forms::ColumnHeader^ Price;
-		   System::Windows::Forms::TabPage^ tabPage2;
-	private: System::Windows::Forms::ListView^ CartList;
-	private: System::Windows::Forms::Panel^ ShopPanel;
-	private: System::Windows::Forms::Panel^ CartPanel;
-	private: System::Windows::Forms::Button^ PurchaseButton;
-	private: System::Windows::Forms::Button^ GoToShopButton;
-	private: System::Windows::Forms::ColumnHeader^ columnHeader1;
-	private: System::Windows::Forms::ColumnHeader^ columnHeader2;
-	private: System::Windows::Forms::ColumnHeader^ columnHeader3;
-	private: System::Windows::Forms::ColumnHeader^ columnHeader4;
-	private: System::Windows::Forms::ColumnHeader^ columnHeader5;
-	private: System::Windows::Forms::Label^ DebugLabel;
 	private:
+		System::Windows::Forms::Label^ ChosenBookLabel;
+		System::Windows::Forms::Button^ AddToCart;
+		System::Windows::Forms::Label^ TotalPriceLabel;
+		System::Windows::Forms::Button^ goToCart;
+		System::Windows::Forms::Panel^ MainPanel;
+		System::Windows::Forms::TabControl^ Tab;
+		System::Windows::Forms::TabPage^ tabPage1;
+		System::Windows::Forms::ListView^ storeList;
+		System::Windows::Forms::ColumnHeader^ Book;
+		System::Windows::Forms::ColumnHeader^ Author;
+		System::Windows::Forms::ColumnHeader^ Category;
+		System::Windows::Forms::ColumnHeader^ Price;
+		System::Windows::Forms::TabPage^ tabPage2;
+		System::Windows::Forms::ListView^ CartList;
+		System::Windows::Forms::Panel^ ShopPanel;
+		System::Windows::Forms::Panel^ CartPanel;
+		System::Windows::Forms::Button^ PurchaseButton;
+		System::Windows::Forms::Button^ GoToShopButton;
+		System::Windows::Forms::ColumnHeader^ columnHeader1;
+		System::Windows::Forms::ColumnHeader^ columnHeader2;
+		System::Windows::Forms::ColumnHeader^ columnHeader3;
+		System::Windows::Forms::ColumnHeader^ columnHeader4;
+		System::Windows::Forms::ColumnHeader^ columnHeader5;
+		System::Windows::Forms::Label^ DebugLabel;
+		System::Windows::Forms::Button^ RemoveItemButton;
 		System::ComponentModel::Container^ components;
 
 #pragma region Windows Form Designer generated code
 		void InitializeComponent(void)
-		{
+		   {
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(MyForm::typeid));
 			this->ChosenBookLabel = (gcnew System::Windows::Forms::Label());
 			this->AddToCart = (gcnew System::Windows::Forms::Button());
@@ -99,6 +100,7 @@ namespace BookStore {
 			this->columnHeader5 = (gcnew System::Windows::Forms::ColumnHeader());
 			this->ShopPanel = (gcnew System::Windows::Forms::Panel());
 			this->CartPanel = (gcnew System::Windows::Forms::Panel());
+			this->RemoveItemButton = (gcnew System::Windows::Forms::Button());
 			this->GoToShopButton = (gcnew System::Windows::Forms::Button());
 			this->PurchaseButton = (gcnew System::Windows::Forms::Button());
 			this->DebugLabel = (gcnew System::Windows::Forms::Label());
@@ -283,18 +285,33 @@ namespace BookStore {
 			// CartPanel
 			// 
 			this->CartPanel->BackColor = System::Drawing::Color::Transparent;
+			this->CartPanel->Controls->Add(this->RemoveItemButton);
 			this->CartPanel->Controls->Add(this->GoToShopButton);
 			this->CartPanel->Controls->Add(this->PurchaseButton);
-			this->CartPanel->Location = System::Drawing::Point(439, 630);
+			this->CartPanel->Location = System::Drawing::Point(364, 630);
 			this->CartPanel->Name = L"CartPanel";
-			this->CartPanel->Size = System::Drawing::Size(364, 71);
+			this->CartPanel->Size = System::Drawing::Size(439, 71);
 			this->CartPanel->TabIndex = 2;
 			this->CartPanel->Visible = false;
 			// 
+			// RemoveItemButton
+			// 
+			this->RemoveItemButton->BackColor = System::Drawing::Color::IndianRed;
+			this->RemoveItemButton->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->RemoveItemButton->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
+			this->RemoveItemButton->Location = System::Drawing::Point(4, 3);
+			this->RemoveItemButton->Name = L"RemoveItemButton";
+			this->RemoveItemButton->Size = System::Drawing::Size(71, 61);
+			this->RemoveItemButton->TabIndex = 5;
+			this->RemoveItemButton->Text = L"Remove Item";
+			this->RemoveItemButton->UseVisualStyleBackColor = false;
+			this->RemoveItemButton->Click += gcnew System::EventHandler(this, &MyForm::RemoveItemButton_Click);
+			// 
 			// GoToShopButton
 			// 
-			this->GoToShopButton->Location = System::Drawing::Point(260, 3);
+			this->GoToShopButton->Location = System::Drawing::Point(335, 3);
 			this->GoToShopButton->Name = L"GoToShopButton";
+			this->GoToShopButton->RightToLeft = System::Windows::Forms::RightToLeft::No;
 			this->GoToShopButton->Size = System::Drawing::Size(101, 61);
 			this->GoToShopButton->TabIndex = 4;
 			this->GoToShopButton->Text = L"Go to Shop";
@@ -302,7 +319,7 @@ namespace BookStore {
 			// 
 			// PurchaseButton
 			// 
-			this->PurchaseButton->Location = System::Drawing::Point(6, 3);
+			this->PurchaseButton->Location = System::Drawing::Point(81, 3);
 			this->PurchaseButton->Name = L"PurchaseButton";
 			this->PurchaseButton->Size = System::Drawing::Size(250, 61);
 			this->PurchaseButton->TabIndex = 2;
@@ -346,63 +363,45 @@ namespace BookStore {
 		}
 #pragma endregion
 
-
 	private:
-		System::Void StoreList_DoubleClick(System::Object^ sender, System::EventArgs^ e)
+		void ProcessCartItem(ListViewItem^ item)
 		{
-			BookStore::Book^ CurrentBook = dynamic_cast<BookStore::Book^>(storeList->SelectedItems[0]->Tag);
-			ChosenBookLabel->Text = CurrentBook->GetName();
+			BookStore::Book^ selectedBook = dynamic_cast<BookStore::Book^>(item->Tag);
+			ListViewItem^ existingItem = FindCartItemByID(selectedBook->GetID());
+
+			if (existingItem)
+			{
+				UpdateExistingCartItem(existingItem);
+			}
+			else
+			{
+				AddNewCartItem(selectedBook);
+			}
 		}
 
-		System::Void AddToCart_Click(System::Object^ sender, System::EventArgs^ e)
+		void UpdateExistingCartItem(ListViewItem^ existingItem)
 		{
-			if (storeList->SelectedItems->Count > 0)
-			{
-				for each (ListViewItem ^ Item in storeList->SelectedItems)
-				{
-					BookStore::Book^ SelectedBook = dynamic_cast<BookStore::Book^>(Item->Tag);
-					int BookIndex = storeList->SelectedItems[0]->Index;
+			CartItem^ cartItem = dynamic_cast<CartItem^>(existingItem->Tag);
+			cartItem->IncrementQuantity();
 
-					ListViewItem^ ExistingItem = FindCartItemByID(SelectedBook->GetID());
+			UpdateNumericUpDownValue(cartItem->GetID(), cartItem->GetQuantity());
+			TotalPrice += cartItem->GetPrice();
+		}
 
-					if (ExistingItem)
-					{
-						CartItem^ cartItem = dynamic_cast<CartItem^>(ExistingItem->Tag);
-						cartItem->IncrementQuantity();
+		void AddNewCartItem(BookStore::Book^ selectedBook)
+		{
+			CartItem^ newCartItem = gcnew CartItem(selectedBook);
+			ShopCart->AddNewItem(newCartItem);
+			DebugLabel->Text = ShopCart->GetSize().ToString();
 
-						UpdateNumericUpDownValue(cartItem->GetID(), cartItem->GetQuantity());
-						TotalPrice += cartItem->GetPrice();
-					}
-					else
-					{
-						CartItem^ NewCartItem = gcnew CartItem(SelectedBook);
-						ShopCart->AddNewItem(NewCartItem);
+			AddCartItemToListView(newCartItem, selectedBook);
+		}
 
-						DebugLabel->Text = ShopCart->GetSize().ToString();
-
-						ListViewItem^ Item = gcnew ListViewItem(NewCartItem->GetName(), CartList->Items->Count);
-
-						String^ LinkToImage = SelectedBook->GetImageLink();
-						CartImageList->Images->Add(Image::FromFile(LinkToImage));
-
-						Item->SubItems->Add(NewCartItem->GetAuthor());
-						Item->SubItems->Add(NewCartItem->GetGenre());
-						Item->SubItems->Add(NewCartItem->GetPrice().ToString("C"));
-						Item->SubItems->Add(NewCartItem->GetQuantity().ToString());
-
-						Item->Tag = NewCartItem;
-
-						TotalPrice += NewCartItem->GetPrice();
-
-						CartList->Items->Add(Item);
-
-						AddNumericUpDownToNumberField(Item);
-					}
-
-					ChosenBookLabel->Text = "Chose Your Book!";
-					TotalPriceLabel->Text = TotalPrice.ToString("C");
-				}
-			}
+		void AddCartItemToListView(CartItem^ newCartItem, BookStore::Book^ selectedBook)
+		{
+			ListViewItem^ listViewItem = CreateListViewItemForCartItem(newCartItem, selectedBook);
+			CartList->Items->Add(listViewItem);
+			AddNumericUpDownToNumberField(listViewItem);
 		}
 
 		void AddNumericUpDownToNumberField(ListViewItem^ Item)
@@ -432,10 +431,95 @@ namespace BookStore {
 			NumberFields[ItemID]->SetBounds(xPos, yPos, 45, 30);
 		}
 
-		System::Void storeList_Click(System::Object^ sender, System::EventArgs^ e)
+		void UpdateCartItemQuantity(int itemId, int newQuantity)
 		{
-			BookStore::Book^ book = dynamic_cast<BookStore::Book^>(storeList->SelectedItems[0]->Tag);
-			ChosenBookLabel->Text = book->GetID().ToString();
+			CartItem^ cartItem = ShopCart->FindByID(itemId);
+
+			if (cartItem != nullptr)
+			{
+				cartItem->SetQuantity(newQuantity);
+			}
+		}
+
+		void UpdateNumericUpDownValue(int ID, int NewValue)
+		{
+			NumberFields[ID]->Value = NewValue;
+		}
+
+		void UpdateTotalPrice()
+		{
+			TotalPrice = 0.0f;
+			for each (CartItem ^ item in ShopCart->Items)
+			{
+				TotalPrice += item->GetPrice() * item->GetQuantity();
+			}
+			UpdateTotalPriceLabel();
+		}
+
+		void UpdateTotalPriceLabel()
+		{
+			TotalPriceLabel->Text = TotalPrice.ToString("C");
+		}
+
+		void UpdateCartDisplay()
+		{
+			ChosenBookLabel->Text = "Chose Your Book!";
+			UpdateTotalPriceLabel();
+		}
+
+		void RemoveCartItem(const int ID)
+		{
+			if (ShopCart->RemoveByID(ID))
+			{
+				ListViewItem^ itemToRemove = nullptr;
+
+				for each (ListViewItem ^ item in CartList->Items)
+				{
+					CartItem^ cartItem = dynamic_cast<CartItem^>(item->Tag);
+					if (cartItem && cartItem->GetID() == ID)
+					{
+						itemToRemove = item;
+						break;
+					}
+				}
+
+				if (itemToRemove != nullptr)
+				{
+					CartList->Items->Remove(itemToRemove);
+
+					if (NumberFields->ContainsKey(ID))
+					{
+						Controls->Remove(NumberFields[ID]);
+						NumberFields->Remove(ID);
+					}
+				}
+
+				RedrawNumericUpDowns();
+				UpdateTotalPrice();
+			}
+		}
+
+		void RedrawNumericUpDowns()
+		{
+			for each (ListViewItem^ Item in CartList->Items)
+			{
+				CartItem^ cartItem = safe_cast<CartItem^>(Item->Tag);
+				int itemId = cartItem->GetID(); // Assuming the Tag stores the item ID
+
+				if (NumberFields->ContainsKey(itemId))
+				{
+					NumericUpDown^ numericUpDown = NumberFields[itemId];
+					PositionNumericUpDown(numericUpDown, Item);
+				}
+			}
+		}
+
+		void PositionNumericUpDown(NumericUpDown^ numericUpDown, ListViewItem^ listViewItem)
+		{
+			int columnIndex = 4;
+			int xPos = GetColumnPosition(CartList, columnIndex) + 15;
+			int yPos = listViewItem->Bounds.Y + 45;
+			numericUpDown->SetBounds(xPos, yPos, numericUpDown->Width, numericUpDown->Height);
 		}
 
 		ListViewItem^ FindCartItemByID(const int id)
@@ -455,6 +539,78 @@ namespace BookStore {
 			return nullptr;
 		}
 
+		ListViewItem^ CreateListViewItemForCartItem(CartItem^ cartItem, BookStore::Book^ selectedBook)
+		{
+			ListViewItem^ item = gcnew ListViewItem(cartItem->GetName());
+			item->SubItems->Add(cartItem->GetAuthor());
+			item->SubItems->Add(cartItem->GetGenre());
+			item->SubItems->Add(cartItem->GetPrice().ToString("C"));
+			item->SubItems->Add(cartItem->GetQuantity().ToString());
+			item->Tag = cartItem;
+
+			String^ linkToImage = selectedBook->GetImageLink();
+			CartImageList->Images->Add(Image::FromFile(linkToImage));
+			item->ImageIndex = CartImageList->Images->Count - 1;
+
+			TotalPrice += cartItem->GetPrice();
+
+			return item;
+		}
+
+		int GetColumnPosition(ListView^ listView, int columnIndex)
+		{
+			int position = 0;
+
+			if (columnIndex < 0 || columnIndex >= listView->Columns->Count)
+			{
+				throw gcnew ArgumentOutOfRangeException("columnIndex");
+			}
+
+			for (int i = 0; i < columnIndex; i++)
+			{
+				position += listView->Columns[i]->Width;
+			}
+
+			return position;
+		}
+
+		// Events:
+		System::Void AddToCart_Click(System::Object^ sender, System::EventArgs^ e)
+		{
+			if (storeList->SelectedItems->Count > 0)
+			{
+				for each (ListViewItem ^ item in storeList->SelectedItems)
+				{
+					ProcessCartItem(item);
+				}
+
+				UpdateCartDisplay();
+			}
+		}
+		System::Void OnNumericUpDownValueChanged(System::Object^ sender, System::EventArgs^ e)
+		{
+			NumericUpDown^ numericUpDown = safe_cast<NumericUpDown^>(sender);
+
+			if (numericUpDown != nullptr)
+			{
+				CartItem^ SelectedItem = ShopCart->FindByID(static_cast<int>(numericUpDown->Tag));
+
+				if (SelectedItem != nullptr)
+				{
+					UpdateCartItemQuantity(SelectedItem->GetID(), Convert::ToInt32(numericUpDown->Value));
+					UpdateTotalPrice();
+					DebugLabel->Text = SelectedItem->GetName();
+				}
+			}
+		}
+		System::Void RemoveItemButton_Click(System::Object^ sender, System::EventArgs^ e)
+		{
+			for each (ListViewItem ^ Item in CartList->SelectedItems)
+			{
+				int Item_ID = safe_cast<CartItem^>(Item->Tag)->GetID();
+				RemoveCartItem(Item_ID);
+			}
+		}
 		System::Void Tab_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e)
 		{
 			if (Tab->SelectedIndex == 1)
@@ -488,64 +644,17 @@ namespace BookStore {
 			}
 		}
 
-		void MyForm::OnNumericUpDownValueChanged(System::Object^ sender, System::EventArgs^ e)
+		// Debugging Functions:
+		System::Void StoreList_DoubleClick(System::Object^ sender, System::EventArgs^ e)
 		{
-			NumericUpDown^ numericUpDown = safe_cast<NumericUpDown^>(sender);
-
-			if (numericUpDown != nullptr)
-			{
-				CartItem^ SelectedItem = ShopCart->FindByID(static_cast<int>(numericUpDown->Tag));
-
-				if (SelectedItem != nullptr)
-				{
-					UpdateCartItemQuantity(SelectedItem->GetID(), Convert::ToInt32(numericUpDown->Value));
-					UpdateTotalPrice();
-				}
-			}
+			BookStore::Book^ CurrentBook = dynamic_cast<BookStore::Book^>(storeList->SelectedItems[0]->Tag);
+			ChosenBookLabel->Text = CurrentBook->GetName();
 		}
-
-		int GetColumnPosition(ListView^ listView, int columnIndex)
+		System::Void storeList_Click(System::Object^ sender, System::EventArgs^ e)
 		{
-			int position = 0;
-
-			// Ensure the columnIndex is within the range
-			if (columnIndex < 0 || columnIndex >= listView->Columns->Count)
-			{
-				throw gcnew ArgumentOutOfRangeException("columnIndex");
-			}
-
-			// Sum the widths of all columns before the specified one
-			for (int i = 0; i < columnIndex; i++)
-			{
-				position += listView->Columns[i]->Width;
-			}
-
-			return position;
+			BookStore::Book^ book = dynamic_cast<BookStore::Book^>(storeList->SelectedItems[0]->Tag);
+			ChosenBookLabel->Text = book->GetID().ToString();
 		}
-		
-		void UpdateCartItemQuantity(int itemId, int newQuantity)
-		{
-			CartItem^ cartItem = ShopCart->FindByID(itemId);
-
-			if (cartItem != nullptr)
-			{
-				cartItem->SetQuantity(newQuantity); 
-			}
-		}
-		void UpdateNumericUpDownValue(int ID, int NewValue)
-		{
-			NumberFields[ID]->Value = NewValue;
-		}
-		
-		void MyForm::UpdateTotalPrice()
-		{
-			TotalPrice = 0.0f;
-			for each (CartItem^ item in ShopCart->Items)
-			{
-				TotalPrice += item->GetPrice() * item->GetQuantity();
-			}
-			TotalPriceLabel->Text = TotalPrice.ToString("C");
-		}
-	};
+};
 };
 
