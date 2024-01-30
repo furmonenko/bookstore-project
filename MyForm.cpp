@@ -2,19 +2,22 @@
 
 void BookStore::MyForm::InitializeStore()
 {
-	ShopCatalogue = gcnew Catalogue();
+	db = Database::Instance;
+	// ShopCatalogue = gcnew Catalogue();
 	ShopCart = gcnew Cart();
 	NumberFields = gcnew Dictionary<int, NumericUpDown^>;
 
 	TotalPrice = 0.0f;
 
-	BookStore::PaperBook^ FireBook = gcnew BookStore::PaperBook("Book Of Fire", "Fire Man", 200.f, BookStore::BookGenre::Elemental_Magic, "Images/FireBook.png");
-	BookStore::PaperBook^ EarthBook = gcnew BookStore::PaperBook("Book Of Earth", "Earth Man", 200.f, BookStore::BookGenre::Elemental_Magic, "Images/EarthBook.png");
-	BookStore::PaperBook^ WaterBook = gcnew BookStore::PaperBook("Book Of Water", "Water Man", 200.f, BookStore::BookGenre::Elemental_Magic, "Images/WaterBook.png");
+	//BookStore::PaperBook^ FireBook = gcnew BookStore::PaperBook("Book Of Fire", "Fire Man", 200.f, BookStore::BookGenre::Elemental_Magic, "Images/FireBook.png");
+	//BookStore::PaperBook^ EarthBook = gcnew BookStore::PaperBook("Book Of Earth", "Earth Man", 200.f, BookStore::BookGenre::Elemental_Magic, "Images/EarthBook.png");
+	//BookStore::PaperBook^ WaterBook = gcnew BookStore::PaperBook("Book Of Water", "Water Man", 200.f, BookStore::BookGenre::Elemental_Magic, "Images/WaterBook.png");
 
-	ShopCatalogue->AddNewBook(FireBook);
-	ShopCatalogue->AddNewBook(EarthBook);
-	ShopCatalogue->AddNewBook(WaterBook);
+	//ShopCatalogue->AddNewBook(FireBook);
+	//ShopCatalogue->AddNewBook(EarthBook);
+	//ShopCatalogue->AddNewBook(WaterBook);
+
+	ShopCatalogue = gcnew Catalogue(db->GetBooks());
 
 	ShopImageList = gcnew ImageList();
 	ShopImageList->ImageSize = Drawing::Size(30, 30);
@@ -27,7 +30,13 @@ void BookStore::MyForm::InitializeStore()
 		if (ShopCatalogue->GetBook(i))
 		{
 			System::String^ LinkToImage = ShopCatalogue->GetBook(i)->GetImageLink();
-			ShopImageList->Images->Add(System::Drawing::Image::FromFile(LinkToImage));
+
+			String^ fileName = String::Format("Images/{0}", LinkToImage);
+			// fileName->Concat(LinkToImage);
+
+			Console::WriteLine(fileName);
+
+			ShopImageList->Images->Add(System::Drawing::Image::FromFile(fileName));
 		}
 	}
 

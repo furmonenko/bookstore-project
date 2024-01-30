@@ -4,6 +4,7 @@
 #include "CartItem.h"
 #include "Cart.h"
 #include "ListViewItemSorter.h"
+#include "Database.h"
 
 namespace BookStore {
 
@@ -47,6 +48,8 @@ namespace BookStore {
 		double TotalPrice;
 
 		Dictionary<int, NumericUpDown^>^ NumberFields;
+
+		Database^ db;
 
 	private:
 		System::Windows::Forms::Label^ ChosenBookLabel;
@@ -552,7 +555,8 @@ namespace BookStore {
 			item->SubItems->Add(cartItem->GetQuantity().ToString());
 			item->Tag = cartItem;
 
-			String^ linkToImage = selectedBook->GetImageLink();
+			String^ linkToImage = String::Format("Images/{0}", selectedBook->GetImageLink());
+
 			CartImageList->Images->Add(System::Drawing::Image::FromFile(linkToImage));
 			item->ImageIndex = CartImageList->Images->Count - 1;
 

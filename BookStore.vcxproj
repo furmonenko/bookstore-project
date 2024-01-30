@@ -75,6 +75,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ManagedAssembly>true</ManagedAssembly>
+    <IncludePath>C:\Users\zfurm\vcpkg\packages\libpq_x64-windows\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\zfurm\vcpkg\packages\libpq_x64-windows\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -82,7 +84,7 @@
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <AdditionalDependencies />
+      <AdditionalDependencies>libpq.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Windows</SubSystem>
       <EntryPointSymbol>main</EntryPointSymbol>
     </Link>
@@ -124,9 +126,6 @@
     <Reference Include="itextsharp">
       <HintPath>packages\iTextSharp.5.5.13.3\lib\itextsharp.dll</HintPath>
     </Reference>
-    <Reference Include="Npgsql">
-      <HintPath>packages\Npgsql.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -138,6 +137,7 @@
     <ClCompile Include="Cart.cpp" />
     <ClCompile Include="CartItem.cpp" />
     <ClCompile Include="Catalogue.cpp" />
+    <ClCompile Include="Database.cpp" />
     <ClCompile Include="ListViewItemSorter.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MyForm.cpp" />
@@ -148,6 +148,7 @@
     <ClInclude Include="Cart.h" />
     <ClInclude Include="CartItem.h" />
     <ClInclude Include="Catalogue.h" />
+    <ClInclude Include="Database.h" />
     <ClInclude Include="ListViewItemSorter.h" />
     <ClInclude Include="MyForm.h">
       <FileType>CppForm</FileType>

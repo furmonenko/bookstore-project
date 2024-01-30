@@ -9,12 +9,16 @@ namespace BookStore
     public ref class Catalogue
     {
     private:
-        List<Book^>^ Books;
+        System::Collections::Generic::List<Book^>^ Books;
 
     public:
         Catalogue()
         {
-            Books = gcnew List<Book^>();
+            Books = gcnew System::Collections::Generic::List<Book^>();
+        }
+        Catalogue(System::Collections::Generic::List<Book^>^ bookList)
+        {
+            Books = bookList;
         }
 
         void AddNewBook(Book^ newBook)
