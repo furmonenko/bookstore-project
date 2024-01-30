@@ -75,7 +75,7 @@ namespace BookStore {
 		System::Windows::Forms::ColumnHeader^ columnHeader3;
 		System::Windows::Forms::ColumnHeader^ columnHeader4;
 		System::Windows::Forms::ColumnHeader^ columnHeader5;
-		System::Windows::Forms::Label^ DebugLabel;
+
 		System::Windows::Forms::Button^ RemoveItemButton;
 		System::ComponentModel::Container^ components;
 
@@ -107,7 +107,6 @@ namespace BookStore {
 			this->RemoveItemButton = (gcnew System::Windows::Forms::Button());
 			this->GoToShopButton = (gcnew System::Windows::Forms::Button());
 			this->PurchaseButton = (gcnew System::Windows::Forms::Button());
-			this->DebugLabel = (gcnew System::Windows::Forms::Label());
 			this->Tab->SuspendLayout();
 			this->tabPage1->SuspendLayout();
 			this->tabPage2->SuspendLayout();
@@ -119,19 +118,21 @@ namespace BookStore {
 			// 
 			this->ChosenBookLabel->AutoSize = true;
 			this->ChosenBookLabel->BackColor = System::Drawing::Color::White;
-			this->ChosenBookLabel->Location = System::Drawing::Point(445, 590);
-			this->ChosenBookLabel->MinimumSize = System::Drawing::Size(250, 40);
+			this->ChosenBookLabel->Location = System::Drawing::Point(334, 479);
+			this->ChosenBookLabel->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
+			this->ChosenBookLabel->MinimumSize = System::Drawing::Size(188, 32);
 			this->ChosenBookLabel->Name = L"ChosenBookLabel";
-			this->ChosenBookLabel->Size = System::Drawing::Size(250, 40);
+			this->ChosenBookLabel->Size = System::Drawing::Size(188, 32);
 			this->ChosenBookLabel->TabIndex = 1;
 			this->ChosenBookLabel->Text = L"Chose Your Book!";
 			this->ChosenBookLabel->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 			// 
 			// AddToCart
 			// 
-			this->AddToCart->Location = System::Drawing::Point(6, 3);
+			this->AddToCart->Location = System::Drawing::Point(4, 2);
+			this->AddToCart->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->AddToCart->Name = L"AddToCart";
-			this->AddToCart->Size = System::Drawing::Size(250, 61);
+			this->AddToCart->Size = System::Drawing::Size(188, 50);
 			this->AddToCart->TabIndex = 2;
 			this->AddToCart->Text = L"Add to Cart";
 			this->AddToCart->UseVisualStyleBackColor = true;
@@ -141,28 +142,31 @@ namespace BookStore {
 			// 
 			this->TotalPriceLabel->AutoSize = true;
 			this->TotalPriceLabel->BackColor = System::Drawing::Color::White;
-			this->TotalPriceLabel->Location = System::Drawing::Point(700, 590);
-			this->TotalPriceLabel->MinimumSize = System::Drawing::Size(100, 40);
+			this->TotalPriceLabel->Location = System::Drawing::Point(525, 479);
+			this->TotalPriceLabel->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
+			this->TotalPriceLabel->MinimumSize = System::Drawing::Size(75, 32);
 			this->TotalPriceLabel->Name = L"TotalPriceLabel";
-			this->TotalPriceLabel->Size = System::Drawing::Size(100, 40);
+			this->TotalPriceLabel->Size = System::Drawing::Size(75, 32);
 			this->TotalPriceLabel->TabIndex = 3;
 			this->TotalPriceLabel->Text = L"Total Price";
 			this->TotalPriceLabel->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 			// 
 			// goToCart
 			// 
-			this->goToCart->Location = System::Drawing::Point(260, 3);
+			this->goToCart->Location = System::Drawing::Point(195, 2);
+			this->goToCart->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->goToCart->Name = L"goToCart";
-			this->goToCart->Size = System::Drawing::Size(101, 61);
+			this->goToCart->Size = System::Drawing::Size(76, 50);
 			this->goToCart->TabIndex = 4;
 			this->goToCart->Text = L"Go to Cart";
 			this->goToCart->UseVisualStyleBackColor = true;
 			// 
 			// MainPanel
 			// 
-			this->MainPanel->Location = System::Drawing::Point(12, 12);
+			this->MainPanel->Location = System::Drawing::Point(9, 10);
+			this->MainPanel->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->MainPanel->Name = L"MainPanel";
-			this->MainPanel->Size = System::Drawing::Size(808, 556);
+			this->MainPanel->Size = System::Drawing::Size(606, 452);
 			this->MainPanel->TabIndex = 0;
 			this->MainPanel->Visible = false;
 			// 
@@ -171,20 +175,22 @@ namespace BookStore {
 			this->Tab->Appearance = System::Windows::Forms::TabAppearance::Buttons;
 			this->Tab->Controls->Add(this->tabPage1);
 			this->Tab->Controls->Add(this->tabPage2);
-			this->Tab->Location = System::Drawing::Point(12, 12);
+			this->Tab->Location = System::Drawing::Point(9, 10);
+			this->Tab->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->Tab->Name = L"Tab";
 			this->Tab->SelectedIndex = 0;
-			this->Tab->Size = System::Drawing::Size(808, 573);
+			this->Tab->Size = System::Drawing::Size(606, 466);
 			this->Tab->TabIndex = 1;
 			this->Tab->SelectedIndexChanged += gcnew System::EventHandler(this, &MyForm::Tab_SelectedIndexChanged);
 			// 
 			// tabPage1
 			// 
 			this->tabPage1->Controls->Add(this->storeList);
-			this->tabPage1->Location = System::Drawing::Point(4, 28);
+			this->tabPage1->Location = System::Drawing::Point(4, 25);
+			this->tabPage1->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->tabPage1->Name = L"tabPage1";
-			this->tabPage1->Padding = System::Windows::Forms::Padding(3);
-			this->tabPage1->Size = System::Drawing::Size(800, 541);
+			this->tabPage1->Padding = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->tabPage1->Size = System::Drawing::Size(598, 437);
 			this->tabPage1->TabIndex = 0;
 			this->tabPage1->Text = L"Shop";
 			this->tabPage1->UseVisualStyleBackColor = true;
@@ -197,9 +203,10 @@ namespace BookStore {
 					this->Category, this->Price
 			});
 			this->storeList->HideSelection = false;
-			this->storeList->Location = System::Drawing::Point(-4, 0);
+			this->storeList->Location = System::Drawing::Point(-3, 0);
+			this->storeList->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->storeList->Name = L"storeList";
-			this->storeList->Size = System::Drawing::Size(805, 598);
+			this->storeList->Size = System::Drawing::Size(604, 486);
 			this->storeList->TabIndex = 0;
 			this->storeList->UseCompatibleStateImageBehavior = false;
 			this->storeList->View = System::Windows::Forms::View::Details;
@@ -210,17 +217,17 @@ namespace BookStore {
 			// Book
 			// 
 			this->Book->Text = L"Book";
-			this->Book->Width = 250;
+			this->Book->Width = 200;
 			// 
 			// Author
 			// 
 			this->Author->Text = L"Author";
-			this->Author->Width = 250;
+			this->Author->Width = 150;
 			// 
 			// Category
 			// 
 			this->Category->Text = L"Category";
-			this->Category->Width = 200;
+			this->Category->Width = 150;
 			// 
 			// Price
 			// 
@@ -230,10 +237,11 @@ namespace BookStore {
 			// tabPage2
 			// 
 			this->tabPage2->Controls->Add(this->CartList);
-			this->tabPage2->Location = System::Drawing::Point(4, 28);
+			this->tabPage2->Location = System::Drawing::Point(4, 25);
+			this->tabPage2->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->tabPage2->Name = L"tabPage2";
-			this->tabPage2->Padding = System::Windows::Forms::Padding(3);
-			this->tabPage2->Size = System::Drawing::Size(800, 541);
+			this->tabPage2->Padding = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->tabPage2->Size = System::Drawing::Size(598, 437);
 			this->tabPage2->TabIndex = 1;
 			this->tabPage2->Text = L"Cart";
 			this->tabPage2->UseVisualStyleBackColor = true;
@@ -246,9 +254,10 @@ namespace BookStore {
 					this->columnHeader3, this->columnHeader4, this->columnHeader5
 			});
 			this->CartList->HideSelection = false;
-			this->CartList->Location = System::Drawing::Point(-4, 0);
+			this->CartList->Location = System::Drawing::Point(-3, 0);
+			this->CartList->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->CartList->Name = L"CartList";
-			this->CartList->Size = System::Drawing::Size(808, 598);
+			this->CartList->Size = System::Drawing::Size(606, 486);
 			this->CartList->TabIndex = 1;
 			this->CartList->UseCompatibleStateImageBehavior = false;
 			this->CartList->View = System::Windows::Forms::View::Details;
@@ -257,35 +266,37 @@ namespace BookStore {
 			// columnHeader1
 			// 
 			this->columnHeader1->Text = L"Book";
-			this->columnHeader1->Width = 225;
+			this->columnHeader1->Width = 150;
 			// 
 			// columnHeader2
 			// 
 			this->columnHeader2->Text = L"Author";
-			this->columnHeader2->Width = 225;
+			this->columnHeader2->Width = 125;
 			// 
 			// columnHeader3
 			// 
 			this->columnHeader3->Text = L"Category";
-			this->columnHeader3->Width = 200;
+			this->columnHeader3->Width = 125;
 			// 
 			// columnHeader4
 			// 
 			this->columnHeader4->Text = L"Price";
-			this->columnHeader4->Width = 100;
+			this->columnHeader4->Width = 125;
 			// 
 			// columnHeader5
 			// 
 			this->columnHeader5->Text = L"#";
+			this->columnHeader5->Width = 75;
 			// 
 			// ShopPanel
 			// 
 			this->ShopPanel->BackColor = System::Drawing::Color::Transparent;
 			this->ShopPanel->Controls->Add(this->AddToCart);
 			this->ShopPanel->Controls->Add(this->goToCart);
-			this->ShopPanel->Location = System::Drawing::Point(439, 630);
+			this->ShopPanel->Location = System::Drawing::Point(329, 512);
+			this->ShopPanel->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->ShopPanel->Name = L"ShopPanel";
-			this->ShopPanel->Size = System::Drawing::Size(364, 71);
+			this->ShopPanel->Size = System::Drawing::Size(273, 58);
 			this->ShopPanel->TabIndex = 1;
 			// 
 			// CartPanel
@@ -294,9 +305,10 @@ namespace BookStore {
 			this->CartPanel->Controls->Add(this->RemoveItemButton);
 			this->CartPanel->Controls->Add(this->GoToShopButton);
 			this->CartPanel->Controls->Add(this->PurchaseButton);
-			this->CartPanel->Location = System::Drawing::Point(364, 630);
+			this->CartPanel->Location = System::Drawing::Point(273, 512);
+			this->CartPanel->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->CartPanel->Name = L"CartPanel";
-			this->CartPanel->Size = System::Drawing::Size(439, 71);
+			this->CartPanel->Size = System::Drawing::Size(329, 58);
 			this->CartPanel->TabIndex = 2;
 			this->CartPanel->Visible = false;
 			// 
@@ -305,9 +317,10 @@ namespace BookStore {
 			this->RemoveItemButton->BackColor = System::Drawing::Color::IndianRed;
 			this->RemoveItemButton->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->RemoveItemButton->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-			this->RemoveItemButton->Location = System::Drawing::Point(4, 3);
+			this->RemoveItemButton->Location = System::Drawing::Point(3, 2);
+			this->RemoveItemButton->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->RemoveItemButton->Name = L"RemoveItemButton";
-			this->RemoveItemButton->Size = System::Drawing::Size(71, 61);
+			this->RemoveItemButton->Size = System::Drawing::Size(53, 50);
 			this->RemoveItemButton->TabIndex = 5;
 			this->RemoveItemButton->Text = L"Remove Item";
 			this->RemoveItemButton->UseVisualStyleBackColor = false;
@@ -315,48 +328,40 @@ namespace BookStore {
 			// 
 			// GoToShopButton
 			// 
-			this->GoToShopButton->Location = System::Drawing::Point(335, 3);
+			this->GoToShopButton->Location = System::Drawing::Point(251, 2);
+			this->GoToShopButton->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->GoToShopButton->Name = L"GoToShopButton";
 			this->GoToShopButton->RightToLeft = System::Windows::Forms::RightToLeft::No;
-			this->GoToShopButton->Size = System::Drawing::Size(101, 61);
+			this->GoToShopButton->Size = System::Drawing::Size(76, 50);
 			this->GoToShopButton->TabIndex = 4;
 			this->GoToShopButton->Text = L"Go to Shop";
 			this->GoToShopButton->UseVisualStyleBackColor = true;
 			// 
 			// PurchaseButton
 			// 
-			this->PurchaseButton->Location = System::Drawing::Point(81, 3);
+			this->PurchaseButton->Location = System::Drawing::Point(61, 2);
+			this->PurchaseButton->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->PurchaseButton->Name = L"PurchaseButton";
-			this->PurchaseButton->Size = System::Drawing::Size(250, 61);
+			this->PurchaseButton->Size = System::Drawing::Size(188, 50);
 			this->PurchaseButton->TabIndex = 2;
 			this->PurchaseButton->Text = L"Purchase";
 			this->PurchaseButton->UseVisualStyleBackColor = true;
 			this->PurchaseButton->Click += gcnew System::EventHandler(this, &MyForm::PurchaseButton_Click);
 			// 
-			// DebugLabel
-			// 
-			this->DebugLabel->AutoSize = true;
-			this->DebugLabel->Location = System::Drawing::Point(52, 594);
-			this->DebugLabel->MinimumSize = System::Drawing::Size(100, 100);
-			this->DebugLabel->Name = L"DebugLabel";
-			this->DebugLabel->Size = System::Drawing::Size(100, 100);
-			this->DebugLabel->TabIndex = 4;
-			this->DebugLabel->Text = L"label1";
-			// 
 			// MyForm
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
 			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::None;
-			this->ClientSize = System::Drawing::Size(832, 703);
-			this->Controls->Add(this->DebugLabel);
+			this->ClientSize = System::Drawing::Size(624, 571);
 			this->Controls->Add(this->CartPanel);
 			this->Controls->Add(this->TotalPriceLabel);
 			this->Controls->Add(this->Tab);
 			this->Controls->Add(this->ChosenBookLabel);
 			this->Controls->Add(this->MainPanel);
 			this->Controls->Add(this->ShopPanel);
+			this->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->Name = L"MyForm";
 			this->Text = L"BookStore";
 			this->Tab->ResumeLayout(false);
@@ -375,7 +380,6 @@ namespace BookStore {
 		{
 			CartItem^ newCartItem = gcnew CartItem(selectedBook);
 			ShopCart->AddNewItem(newCartItem);
-			DebugLabel->Text = ShopCart->GetSize().ToString();
 
 			AddCartItemToListView(newCartItem, selectedBook);
 		}
@@ -621,7 +625,6 @@ namespace BookStore {
 				{
 					UpdateCartItemQuantity(SelectedItem->GetID(), Convert::ToInt32(numericUpDown->Value));
 					UpdateTotalPrice();
-					DebugLabel->Text = SelectedItem->GetName();
 				}
 			}
 		}
@@ -672,9 +675,9 @@ namespace BookStore {
 		}
 		System::Void PurchaseButton_Click(System::Object^ sender, System::EventArgs^ e)
 		{
-			String^ Meesage = "Your Receipt is ready! Get it there - " + "C:\\Users\\zfurm\\Downloads\\Receipt.pdf";
+			String^ Meesage = "Your Receipt is ready! Get it there - " + "C:\\Users\\zfurm\\Downloads\\";
 			MessageBox::Show(Meesage);
-			CreatePDFReceipt("C:\\Users\\zfurm\\Downloads\\Receipt.pdf");
+			CreatePDFReceipt("C:\\Users\\zfurm\\Downloads\\Receipt_");
 		}
 
 
@@ -695,13 +698,22 @@ namespace BookStore {
 		{
 			try
 			{
+				DateTime now = DateTime::Now;
+				String^ dateTimeStr = now.ToString("yyyy-MM-dd_HH-mm-ss");
+				String^ formattedDateTime = now.ToString("yyyy-MM-dd HH:mm:ss");
+
+				String^ newFilePath = String::Format("{0}_{1}.pdf", filePath, dateTimeStr);
+
 				Document^ document = gcnew Document(PageSize::LETTER);
 
-				PdfWriter::GetInstance(document, gcnew System::IO::FileStream(filePath, System::IO::FileMode::Create));
+				PdfWriter::GetInstance(document, gcnew System::IO::FileStream(newFilePath, System::IO::FileMode::Create));
 
 				document->Open();
 
 				document->Add(gcnew Paragraph("Receipt"));
+				document->Add(gcnew Paragraph("-------------------------------"));
+
+				document->Add(gcnew Paragraph("Date and Time: " + formattedDateTime));
 				document->Add(gcnew Paragraph("-------------------------------"));
 
 				for each (CartItem ^ item in ShopCart->Items)

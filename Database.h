@@ -48,7 +48,6 @@ namespace BookStore
             {
                 Console::WriteLine("Connection to database failed: ");
                 Console::WriteLine(PQerrorMessage(conn));
-                // std::cerr << "Connection to database failed: " << PQerrorMessage(conn) << std::endl;
                 PQfinish(conn);
                 return books;
             }
@@ -57,7 +56,8 @@ namespace BookStore
 
             if (PQresultStatus(res) != PGRES_TUPLES_OK)
             {
-                std::cerr << "No data retrieved: " << PQerrorMessage(conn) << std::endl;
+                Console::WriteLine("No data retrieved: ");
+                Console::WriteLine(PQerrorMessage(conn));
                 PQclear(res);
                 PQfinish(conn);
                 return books;
@@ -69,6 +69,9 @@ namespace BookStore
                 String^ title = marshal_as<String^>(PQgetvalue(res, i, 1));
                 String^ author = marshal_as<String^>(PQgetvalue(res, i, 2));
                 double price = atof(PQgetvalue(res, i, 3));
+
+                // TODO: String from DataBase conversion to BookGenre ENUM.
+
                 String^ imageLink = marshal_as<String^>(PQgetvalue(res, i, 5));
 
                 books->Add(gcnew PaperBook(title, author, price, BookGenre::Elemental_Magic, imageLink));

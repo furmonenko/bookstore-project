@@ -40,12 +40,6 @@ namespace BookStore
         {
             return Books->Count;
         }
-
-        void Sort()
-        {
-            // Implement sorting logic here
-            // For example, you might want to sort by book title or author
-        }
     };
 }
 
