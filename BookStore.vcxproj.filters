@@ -21,10 +21,10 @@
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Book.cpp">
+    <ClCompile Include="IBook.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PaperBook.cpp">
+    <ClCompile Include="Book.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Catalogue.cpp">
@@ -47,10 +47,10 @@
     <ClInclude Include="MainPage.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Book.h">
+    <ClInclude Include="IBook.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PaperBook.h">
+    <ClInclude Include="Book.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Catalogue.h">

@@ -9,29 +9,29 @@ namespace BookStore
     public ref class Catalogue
     {
     private:
-        System::Collections::Generic::List<Book^>^ Books;
+        System::Collections::Generic::List<IBook^>^ Books;
 
     public:
         Catalogue()
         {
-            Books = gcnew System::Collections::Generic::List<Book^>();
+            Books = gcnew System::Collections::Generic::List<IBook^>();
         }
-        Catalogue(System::Collections::Generic::List<Book^>^ bookList)
+        Catalogue(System::Collections::Generic::List<IBook^>^ bookList)
         {
             Books = bookList;
         }
 
-        void AddNewBook(Book^ newBook)
+        void AddNewBook(IBook^ newBook)
         {
             Books->Add(newBook);
         }
 
-        bool DeleteBook(Book^ bookToDelete)
+        bool DeleteBook(IBook^ bookToDelete)
         {
             return Books->Remove(bookToDelete);
         }
 
-        Book^ GetBook(int index)
+        IBook^ GetBook(int index)
         {
             return Books[index];
         }

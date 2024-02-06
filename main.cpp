@@ -2,7 +2,7 @@
 #include <iostream>
 
 #include "MainPage.h"
-#include "PaperBook.h"
+#include "Book.h"
 
 using namespace System;
 using namespace System::Windows::Forms;

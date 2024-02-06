@@ -3,7 +3,8 @@
 #include <iostream>
 #include <string>
 #include <msclr/marshal_cppstd.h>
-#include "PaperBook.h"
+
+#include "Book.h"
 
 namespace BookStore
 {
@@ -33,9 +34,9 @@ namespace BookStore
             }
         }
 
-        System::Collections::Generic::List<Book^>^ GetBooks()
+        System::Collections::Generic::List<IBook^>^ GetBooks()
         {
-            System::Collections::Generic::List<Book^>^ books = gcnew System::Collections::Generic::List<Book^>();
+            System::Collections::Generic::List<IBook^>^ books = gcnew System::Collections::Generic::List<IBook^>();
 
             System::String^ cnnString = "host=localhost port=5432 dbname=book_store user=postgres password=Dertin00";
             std::string connStr = msclr::interop::marshal_as<std::string>(cnnString);
@@ -74,7 +75,7 @@ namespace BookStore
 
                 String^ imageLink = marshal_as<String^>(PQgetvalue(res, i, 5));
 
-                books->Add(gcnew PaperBook(title, author, price, BookGenre::Elemental_Magic, imageLink));
+                books->Add(gcnew Book(title, author, price, BookGenre::Elemental_Magic, imageLink));
             }
 
             PQclear(res);

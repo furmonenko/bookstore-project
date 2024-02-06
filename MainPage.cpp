@@ -36,7 +36,7 @@ namespace BookStore
 
 		for (size_t i = 0; i < ShopCatalogue->GetSize(); i++)
 		{
-			BookStore::Book^ currentBook = ShopCatalogue->GetBook(i);
+			BookStore::IBook^ currentBook = ShopCatalogue->GetBook(i);
 			ListViewItem^ item = gcnew ListViewItem(currentBook->GetName(), i);
 
 			item->SubItems->Add(currentBook->GetAuthor());
@@ -46,13 +46,13 @@ namespace BookStore
 			storeList->Items->Add(item);
 		}
 	}
-	void MainPage::AddNewCartItem(BookStore::Book ^ selectedBook)
+	void MainPage::AddNewCartItem(BookStore::IBook ^ selectedBook)
 	{
 		CartItem^ newCartItem = gcnew CartItem(selectedBook);
 		ShopCart->AddNewItem(newCartItem);
 		AddCartItemToListView(newCartItem, selectedBook);
 	}
-	void MainPage::AddCartItemToListView(CartItem^ newCartItem, BookStore::Book^ selectedBook)
+	void MainPage::AddCartItemToListView(CartItem^ newCartItem, BookStore::IBook^ selectedBook)
 	{
 		ListViewItem^ listViewItem = CreateListViewItemForCartItem(newCartItem, selectedBook);
 		CartList->Items->Add(listViewItem);
@@ -80,7 +80,7 @@ namespace BookStore
 	}
 	void MainPage::ProcessCartItem(ListViewItem^ item)
 	{
-		BookStore::Book^ selectedBook = dynamic_cast<BookStore::Book^>(item->Tag);
+		BookStore::IBook^ selectedBook = dynamic_cast<BookStore::IBook^>(item->Tag);
 		ListViewItem^ existingItem = FindCartItemByID(selectedBook->GetID());
 		if (existingItem)
 		{
@@ -190,7 +190,7 @@ namespace BookStore
 		}
 		return nullptr;
 	}
-	ListViewItem^ MainPage::CreateListViewItemForCartItem(CartItem^ cartItem, BookStore::Book^ selectedBook)
+	ListViewItem^ MainPage::CreateListViewItemForCartItem(CartItem^ cartItem, BookStore::IBook^ selectedBook)
 	{
 		ListViewItem^ item = gcnew ListViewItem(cartItem->GetName());
 		item->SubItems->Add(cartItem->GetAuthor());
@@ -353,12 +353,12 @@ namespace BookStore
 	}
 	System::Void MainPage::StoreList_DoubleClick(System::Object^ sender, System::EventArgs^ e)
 	{
-		BookStore::Book^ CurrentBook = dynamic_cast<BookStore::Book^>(storeList->SelectedItems[0]->Tag);
+		BookStore::IBook^ CurrentBook = dynamic_cast<BookStore::IBook^>(storeList->SelectedItems[0]->Tag);
 		ChosenBookLabel->Text = CurrentBook->GetName();
 	}
 	System::Void MainPage::storeList_Click(System::Object^ sender, System::EventArgs^ e)
 	{
-		BookStore::Book^ book = dynamic_cast<BookStore::Book^>(storeList->SelectedItems[0]->Tag);
+		BookStore::IBook^ book = dynamic_cast<BookStore::IBook^>(storeList->SelectedItems[0]->Tag);
 		ChosenBookLabel->Text = book->GetID().ToString();
 	}
 }

@@ -1,30 +1,46 @@
 #pragma once
+#include "IBook.h"
 
 namespace BookStore
 {
-	public enum class BookGenre
+	ref class Book : public IBook
 	{
-		Elemental_Magic,
-	};
+	private:
+		static int NextId = 1;
+		int ID;
 
-	public interface class Book
-	{
-		virtual System::String^ GetName() = 0;
-		virtual void SetName(System::String^ name) = 0;
+		System::String^ Name;
+		System::String^ Author;
+		double Price;
+		BookGenre Genre;
+		System::String^ ImageLink;
 
-		virtual System::String^ GetAuthor() = 0;
-		virtual void SetAuthor(System::String^ author) = 0;
+	public:
+		Book(System::String^ Name, System::String^ Author, double Price, BookGenre Genre, System::String^ ImageLink);
+		~Book() {};
 
-		virtual double GetPrice() = 0;
-		virtual void SetPrice(double price) = 0;
+		virtual System::String^ GetName() override { return Name; }
+		virtual void SetName(System::String^ name) override { Name = name; }
 
-		virtual System::String^ GetGenre() = 0;
-		virtual void SetGenre(BookGenre genre) = 0;
+		virtual System::String^ GetAuthor() override { return Author; }
+		virtual void SetAuthor(System::String^ author) override { Author = author; }
 
-		virtual System::String^ GetImageLink() = 0;
-		virtual void SetImageLink(System::String^ link) = 0;
+		virtual double GetPrice() override { return Price; }
+		virtual void SetPrice(double price) override { Price = price; }
 
-		virtual int GetID() = 0;
-	};
+		virtual System::String^ GetGenre() override 
+		{ 
+			System::String^ genreString = System::Enum::GetName(BookGenre::typeid, Genre);
+			return genreString;
+		}
+
+		virtual void SetGenre(BookGenre genre) override { Genre = genre; }
+
+		virtual System::String^ GetImageLink() override { return ImageLink; }
+		virtual void SetImageLink(System::String^ link) override { ImageLink = link; }
+
+		virtual int GetID() override { return ID; };
+    };
 }
+
 

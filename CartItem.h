@@ -9,9 +9,9 @@ namespace BookStore
 		unsigned int Quantity;
 
 	public:
-		BookStore::Book^ m_Book;
+		BookStore::IBook^ m_Book;
 
-		CartItem(Book^ InBook)
+		CartItem(IBook^ InBook)
 		{
 			m_Book = InBook;
 		}
