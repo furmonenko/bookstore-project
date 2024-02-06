@@ -139,8 +139,8 @@
     <ClCompile Include="Catalogue.cpp" />
     <ClCompile Include="Database.cpp" />
     <ClCompile Include="ListViewItemSorter.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="MyForm.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="MainPage.cpp" />
     <ClCompile Include="PaperBook.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -150,14 +150,14 @@
     <ClInclude Include="Catalogue.h" />
     <ClInclude Include="Database.h" />
     <ClInclude Include="ListViewItemSorter.h" />
-    <ClInclude Include="MyForm.h">
+    <ClInclude Include="MainPage.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="PaperBook.h" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="MyForm.resx">
-      <DependentUpon>MyForm.h</DependentUpon>
+    <EmbeddedResource Include="MainPage.resx">
+      <DependentUpon>MainPage.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
